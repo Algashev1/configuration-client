@@ -1,33 +1,46 @@
 package com.example.configurationclient;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 
-import java.math.BigInteger;
-import java.util.ArrayList;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import java.math.BigDecimal;
 import java.util.List;
 
 @org.springframework.context.annotation.Configuration
+@ConfigurationProperties(prefix="col")
 public class Configuration {
 
-    @Value("${name}")
     private String name;
 
-    @Value("#{'${list}'.split(',')}")
-    //@Value("${list}")
-    private List<String> list;
+    private List<BigDecimal> list;
 
-    @Bean
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    @Bean
-    public List<BigInteger> list() {
-        List<BigInteger> newList = new ArrayList<>();
-        for (String element: list) {
-            newList.add(new BigInteger(element));
-        }
-        return newList;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public List<BigDecimal> getList() {
+        return list;
+    }
+
+    public void setList(List<BigDecimal> list) {
+        this.list = list;
+    }
+
+//    @Bean
+//    public String name() {
+//        return name;
+//    }
+//
+//    @Bean
+//    public List<BigInteger> list() {
+//        List<BigInteger> newList = new ArrayList<>();
+//        for (String element: list) {
+//            newList.add(new BigInteger(element));
+//        }
+//        return newList;
+//    }
 }

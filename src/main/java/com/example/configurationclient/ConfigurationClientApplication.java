@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @SpringBootApplication
@@ -35,9 +36,9 @@ public class ConfigurationClientApplication {
 
         @RequestMapping(value="/calculate" , method=RequestMethod.GET )
         String getValue(@RequestParam("operationName") String operationName, @RequestParam("configName") String configName) {
-            BigInteger result = BigInteger.ZERO;
-            if(configuration.name().equals(configName)) {
-                List<BigInteger> list = configuration.list();
+            BigDecimal result = BigDecimal.ZERO;
+            if(configuration.getName().equals(configName)) {
+                List<BigDecimal> list = configuration.getList();
                 if (operationName.equals("max")) {
                     result = Collections.max(list);
                 }
@@ -45,11 +46,15 @@ public class ConfigurationClientApplication {
                     result = Collections.min(list);
                 }
                 else if (operationName.equals("sum")) {
-                    for (BigInteger element: list) {
+                    for (BigDecimal element: list) {
                         result = result.add(element);
                     }
                 }
-                return result.toString();
+                else if (operationName.equals("sort")) {
+                    Collections.sort(list);
+                    return list.toString();
+                }
+                    return result.toString();
             }
             else {
                 return "Configurations with this name are not found";
