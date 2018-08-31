@@ -2,7 +2,6 @@ package com.example.configurationclient;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -30,17 +29,4 @@ public class Configuration {
         this.list = list;
     }
 
-//    @Bean
-//    public String name() {
-//        return name;
-//    }
-//
-//    @Bean
-//    public List<BigInteger> list() {
-//        List<BigInteger> newList = new ArrayList<>();
-//        for (String element: list) {
-//            newList.add(new BigInteger(element));
-//        }
-//        return newList;
-//    }
 }
