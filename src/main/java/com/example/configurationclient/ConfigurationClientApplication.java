@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,7 @@ public class ConfigurationClientApplication {
 
     @RefreshScope
     @RestController
+    @RequestMapping ("/test")
     class MessageRestController {
 
         @Autowired
@@ -31,7 +33,7 @@ public class ConfigurationClientApplication {
         private Configuration configuration;
 
 
-        @RequestMapping("/calculate")
+        @RequestMapping(value="/calculate" , method=RequestMethod.GET )
         String getValue(@RequestParam("operationName") String operationName, @RequestParam("configName") String configName) {
             BigInteger result = BigInteger.ZERO;
             if(configuration.name().equals(configName)) {
@@ -55,7 +57,7 @@ public class ConfigurationClientApplication {
 
         }
 
-        @RequestMapping("/parameter")
+        @RequestMapping(value="/parameter" , method=RequestMethod.GET )
         String getParameter(@RequestParam("paramName") String paramName) {
 
             String prop = environment.getProperty(paramName);

@@ -13,8 +13,8 @@ public class Configuration {
     @Value("${name}")
     private String name;
 
-    //@Value("#{'${list}'.split(',')}")
-    @Value("${list}")
+    @Value("#{'${list}'.split(',')}")
+    //@Value("${list}")
     private List<String> list;
 
     @Bean
